@@ -7,7 +7,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
   const { method } = req
-  const { name, password, friend, img } = req.body
+  const { id, name, password, friend, img } = req.body
 
   switch (method) {
     case 'GET':
@@ -22,7 +22,7 @@ export default async function handler(
 
     case 'POST':
       try {
-        await createUser({ name, password, friend, img })
+        await createUser({ id, name, password, friend, img })
         res.status(200).json({ error: false, msg: 'Cadastrado' })
       } catch (error) {
         res.status(400).json({

@@ -19,12 +19,13 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       break
     case 'PUT':
       try {
-        const { name, friend, password } = req.body
+        const { name, friend, password, img } = req.body
 
         const data = {
           name,
           password,
-          friend
+          friend,
+          img
         }
         await updateUser(Number(id), data)
 

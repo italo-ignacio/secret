@@ -1,14 +1,44 @@
 import AuthService from '@services/user'
 import { User } from '@shared/interfaces'
-import { Pessoas } from 'config'
+import { Pessoas, Randomize } from 'config'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import styles from './styles.module.css'
 
 interface HomeTemplateProps {
   user: User
+  token: string
 }
 const HomeTemplate = (props: HomeTemplateProps) => {
   const [show, setShow] = useState(false)
+  const [showw, setShoww] = useState(true)
+  const router = useRouter()
+  const sort = () => {
+    setShoww(false)
+    try {
+      const lista = Randomize()
+      let to: Array<{ id: number; friend: string; img: string }> = []
+      Pessoas.map((pe, index) => {
+        to.push({
+          id: pe.id,
+          friend: lista[index],
+          img: `/images/${lista[index]
+            .replace('Vc tirou a ', '')
+            .replace('Vc tirou o ', '')
+            .toLocaleLowerCase()}.jpg`
+        })
+        if (lista[index].includes(pe.name)) throw new Error()
+      })
+      to.map(pe => {
+        setTimeout(() => {
+          AuthService.atualizar(pe.id, pe.friend, pe.img, props.token)
+        }, 1000)
+      })
+    } catch (error) {
+      sort()
+    }
+  }
+
   return (
     <>
       <div className={styles.div}>
@@ -29,7 +59,7 @@ const HomeTemplate = (props: HomeTemplateProps) => {
                   <img
                     className={`rounded-circle m-0 p-0 `}
                     src={props.user.img}
-                    alt="perfil"
+                    alt=""
                     width={150}
                     height={150}
                   />
@@ -37,29 +67,36 @@ const HomeTemplate = (props: HomeTemplateProps) => {
               </div>
             )}
 
-            {props.user.name === 'Italo' && (
-              <>
-                <button
-                  onClick={() => {
-                    Pessoas.map(pe => {
-                      setTimeout(() => {
-                        AuthService.cadastrar(
-                          pe.name,
-                          pe.password,
-                          pe.friend,
-                          ''
-                        )
-                      }, 1000)
-                    })
-                  }}
-                >
-                  add
-                </button>
-                <br />
-                <br />
-                <button onClick={() => {}}>sortear</button>
-              </>
-            )}
+            {props.user.name === 'Italo' &&
+              props.user.friend === 'Espere o sorteio' && (
+                <>
+                  {/* <button
+                    onClick={() => {
+                      Pessoas.map(pe => {
+                        setTimeout(() => {
+                          AuthService.cadastrar(
+                            pe.id,
+                            pe.name,
+                            pe.password,
+                            pe.friend,
+                            ''
+                          )
+                        }, 1000)
+                      })
+                    }}
+                  >
+                    add
+                  </button> */}
+                  <br />
+                  <br />
+                  <button
+                    onClick={sort}
+                    style={{ display: !showw ? 'none' : 'initial' }}
+                  >
+                    sortear
+                  </button>
+                </>
+              )}
           </div>
         </div>
       </div>

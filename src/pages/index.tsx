@@ -16,7 +16,7 @@ const Home = (props: homeProps) => {
       {props.user.password === '123' ? (
         <AlterarSenha user={props.user} token={props.token} />
       ) : (
-        <HomeTemplate user={props.user} />
+        <HomeTemplate user={props.user} token={props.token} />
       )}
     </PageTemplate>
   )

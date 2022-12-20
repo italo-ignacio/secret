@@ -12,12 +12,14 @@ export default class AuthService {
   }
 
   static async cadastrar(
+    id: number,
     name: string,
     password: string,
     friend: string,
     img: string
   ) {
     const response = await api.post<dto.DtoCadastroResponse>('/api/user', {
+      id,
       name,
       password,
       friend,
@@ -28,19 +30,15 @@ export default class AuthService {
 
   static async atualizar(
     id: number,
-    name: string,
-    password: string | null,
-    email: string,
+    friend: string,
+    img: string,
     token: string
   ) {
     const response = await api.put<dto.DtoSuccessResponse>(
       `/api/user/${id}`,
       {
-        name,
-        password,
-        email,
-        img_perfil: undefined,
-        img_fundo: undefined
+        friend,
+        img
       },
       {
         headers: { authorization: `Bearer ${token}` }
