@@ -13,9 +13,10 @@ const HomeTemplate = (props: HomeTemplateProps) => {
     <>
       <div className={styles.div}>
         <div className="m-5">
-          <h1>Bem vindo {props.user.name}</h1>
-          <br />
           <div style={{ textAlign: 'center' }}>
+            <h1>Olá {props.user.name}</h1>
+            <br />
+
             <button onClick={() => setShow(!show)}>Ver quem eu tirei</button>
             <br />
             <br />
@@ -23,13 +24,14 @@ const HomeTemplate = (props: HomeTemplateProps) => {
             {show && (
               <div style={{ alignContent: 'center' }}>
                 <h1>{props.user.friend}</h1>
+                <br />
                 {props.user.img && (
                   <img
                     className={`rounded-circle m-0 p-0 `}
                     src={props.user.img}
                     alt="perfil"
-                    width={100}
-                    height={100}
+                    width={150}
+                    height={150}
                   />
                 )}
               </div>

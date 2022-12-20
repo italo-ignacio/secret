@@ -100,7 +100,7 @@ export default class AuthService {
     const response = await api.get<dto.DtoValidateResponse>(
       `${
         process.env.NODE_ENV === 'production'
-          ? 'https://animes-skull.vercel.app/api/user/validate'
+          ? 'https://amigo-secreto-eosin.vercel.app/api/user/validate'
           : 'http://localhost:3000/api/user/validate'
       }`,
       {
