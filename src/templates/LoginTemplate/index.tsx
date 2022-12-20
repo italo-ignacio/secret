@@ -21,7 +21,7 @@ const LoginTemplate = () => {
                 className={`form-control ${
                   !!form.formState.errors.name && 'is-invalid'
                 }`}
-                placeholder="E-mail ou Nome"
+                placeholder="Nome"
                 {...form.register('name')}
               />
             </div>
