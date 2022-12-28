@@ -41,7 +41,23 @@ const HomeTemplate = (props: HomeTemplateProps) => {
 
   return (
     <>
-      <div className={styles.div}>
+      <div className={styles.main}>
+        <div className={styles.game}>
+          <iframe
+            width="100%"
+            height="100%"
+            src="https://www.fanfreegames.com/game.php?id_juego=20443&code=v4v4ev8vv7e9bv2vcvvecvv7c9d2vvvb"
+            sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+          ></iframe>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export default HomeTemplate
+/*
+<div className={styles.div}>
         <div className="m-5">
           <div style={{ textAlign: 'center' }}>
             <h1>Olá {props.user.name}</h1>
@@ -86,7 +102,7 @@ const HomeTemplate = (props: HomeTemplateProps) => {
                     }}
                   >
                     add
-                  </button> */}
+                  </button> * / }
                   <br />
                   <br />
                   <button
@@ -100,8 +116,4 @@ const HomeTemplate = (props: HomeTemplateProps) => {
           </div>
         </div>
       </div>
-    </>
-  )
-}
-
-export default HomeTemplate
+*/
